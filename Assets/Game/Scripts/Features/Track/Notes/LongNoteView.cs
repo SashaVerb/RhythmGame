@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class LongNoteView : MonoBehaviour, I2DSize
+public class LongNoteView : MonoBehaviour, IBounds
 {
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] SpriteMask mask;
 
-    public Vector2 Size => spriteRenderer.size;
+    public Bounds bounds => spriteRenderer.bounds;
 
     private void Awake()
     {

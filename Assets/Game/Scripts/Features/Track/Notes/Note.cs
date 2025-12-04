@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public abstract class Note : MonoBehaviour, I2DSize
+public abstract class Note : MonoBehaviour, IBounds
 {
     [SerializeField] protected Binding[] bindings;
     [SerializeField] protected SpriteRenderer arrowSprite;
@@ -32,7 +32,7 @@ public abstract class Note : MonoBehaviour, I2DSize
         }
     }
 
-    public abstract Vector2 Size { get; }
+    public abstract Bounds bounds { get; }
 
     public abstract bool TryPress(Vector3 hitLinePosition);
     public virtual bool TryHold(Vector3 hitLinePosition)

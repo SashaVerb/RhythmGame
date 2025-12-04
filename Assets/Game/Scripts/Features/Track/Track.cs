@@ -54,16 +54,19 @@ public partial class Track : MonoBehaviour, IPausable
 
     private void OnHitNote(HitType hitType)
     {
+        Debug.Log("Hit");
         OnHit?.Invoke(hitType);
     }
 
     private void OnNoteMiss()
     {
+        Debug.Log("Miss");
         OnMiss?.Invoke();
     }
 
     private void OnNotePassHitLine(Note note)
     {
+        Debug.Log("Pass");
         OnMiss?.Invoke();
     }
 

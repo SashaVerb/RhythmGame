@@ -13,7 +13,6 @@ public class RatingAddController
 
     public RatingAddController(RatingAddView ratingAddView, RatingModel ratingModel)
     {
-        Debug.Log("RatingAddController " + ratingAddView.gameObject.name);
         _view = ratingAddView;
         _ratingModel = ratingModel;
 

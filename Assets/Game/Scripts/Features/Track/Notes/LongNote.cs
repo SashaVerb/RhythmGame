@@ -24,7 +24,7 @@ public class LongNote : Note
         }
     }
 
-    public override Vector2 Size => view.Size;
+    public override Bounds bounds => view.bounds;
 
     public override bool TryPress(Vector3 hitLinePosition)
     {

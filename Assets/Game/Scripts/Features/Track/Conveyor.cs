@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Conveyor<T> where T : MonoBehaviour, I2DSize
+public class Conveyor<T> where T : MonoBehaviour, IBounds
 {
     public float Speed { get; set; }
     public bool IsStoped { get; set; }
@@ -53,7 +53,7 @@ public class Conveyor<T> where T : MonoBehaviour, I2DSize
             var objPos = obj.transform.position;
             var direction = position - objPos;
             var absDirection = new Vector2(Mathf.Abs(direction.x), Mathf.Abs(direction.y));
-            Vector2 halfSize = obj.Size * 0.5f;
+            Vector2 halfSize = obj.bounds.size * 0.5f;
 
             if(absDirection.x < halfSize.x && absDirection.y < halfSize.y)
             {
@@ -168,7 +168,7 @@ public class Conveyor<T> where T : MonoBehaviour, I2DSize
 
         public void Check(T obj, Vector3 direction)
         {
-            if(spyingObjects.Contains(obj) && Vector3.Dot(position - obj.transform.position, direction) < 0)
+            if(spyingObjects.Contains(obj) && !(Vector3.Dot(obj.transform.position - position, direction) < 0 || obj.bounds.Contains(position)))
             {
                 spyingObjects.Remove(obj);
                 passedObjects.Add(obj);
