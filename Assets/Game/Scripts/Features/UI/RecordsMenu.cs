@@ -32,7 +32,7 @@ public class RecordsMenu : MonoBehaviour
     {
         for (int i = 0; i < _container.childCount; i++)
         {
-            Destroy(_container.GetChild(i));
+            Destroy(_container.GetChild(i).gameObject);
         }
     }
 }

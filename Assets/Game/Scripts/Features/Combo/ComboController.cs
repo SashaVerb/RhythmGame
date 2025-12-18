@@ -10,6 +10,8 @@ public class ComboController
     public ComboController(ComboView view)
     {
         this.view = view;
+
+        view.ResetCombo();
     }
 
     public int MaxPerfectCombo => maxPerfectCombo;

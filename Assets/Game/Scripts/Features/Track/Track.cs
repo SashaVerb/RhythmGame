@@ -10,6 +10,7 @@ public partial class Track : MonoBehaviour, IPausable
     [SerializeField] Transform hitLine;
     [SerializeField] TrackView view;
 
+
     public Action OnMiss;
 
     public Action<HitType> OnHit;
@@ -33,6 +34,16 @@ public partial class Track : MonoBehaviour, IPausable
 
     private Conveyor<Note> conveyor;
 
+    private void Awake()
+    {
+        conveyor = new(0f, Vector3.down);
+        conveyor.SetMark(hitLine.position + Vector3.down * config.HitDistance, OnNotePassHitLine);
+        conveyor.SetMark(hitLine.position + Vector3.down * config.DisappearOffset, OnNoteRichEnd);
+
+        OnHit += view.OnHit;
+        OnMiss += view.OnMiss;       
+    }
+
     public void AddNote(Note note, float delay)
     {
         note.transform.position = hitLine.position + Vector3.up * Speed * delay;
@@ -42,31 +53,18 @@ public partial class Track : MonoBehaviour, IPausable
         conveyor.Add(note);
     }
 
-    private void Awake()
-    {
-        conveyor = new(0f, Vector3.down);
-        conveyor.SetMark(hitLine.position + Vector3.down * config.HitDistance, OnNotePassHitLine);
-        conveyor.SetMark(hitLine.position + Vector3.down * config.DisappearOffset, OnNoteRichEnd);
-
-        OnHit += view.OnHit;
-        OnMiss += view.OnMiss;
-    }
-
     private void OnHitNote(HitType hitType)
     {
-        Debug.Log("Hit");
         OnHit?.Invoke(hitType);
     }
 
     private void OnNoteMiss()
     {
-        Debug.Log("Miss");
         OnMiss?.Invoke();
     }
 
     private void OnNotePassHitLine(Note note)
     {
-        Debug.Log("Pass");
         OnMiss?.Invoke();
     }
 
@@ -105,6 +103,11 @@ public partial class Track : MonoBehaviour, IPausable
                 {
                     conveyor.Remove(note);
                 }
+            }
+            else
+            {
+                if (wasPressed)
+                    OnMiss?.Invoke();
             }
         }
     }

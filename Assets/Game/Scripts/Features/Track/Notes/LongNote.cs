@@ -49,7 +49,7 @@ public class LongNote : Note
 
     public override bool TryHold(Vector3 hitLinePosition)
     {
-        if(!isActivated) 
+        if (!isActivated) 
             return false;
 
         view.UpdateMaskPosition(hitLinePosition);
@@ -75,8 +75,6 @@ public class LongNote : Note
         isLocked = true;
 
         view.StopEffect();
-
-        //Destroy(gameObject);
 
         return PointPassedNote(hitLinePosition);
     }

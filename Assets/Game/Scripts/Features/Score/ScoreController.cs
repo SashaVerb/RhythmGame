@@ -18,6 +18,8 @@ public class ScoreController
     {
         this.config = config;
         this.view = view;
+
+        Score = 0;
     }
 
     public void CalculateHit(HitType hitType)

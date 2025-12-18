@@ -21,7 +21,6 @@ public class RatingAddView : MonoBehaviour
 
     public void TryGetPlayerName()
     {
-        Debug.Log("Click");
         if (_inputField.text.Length > 0)
         {
             OnPlayerSendName?.Invoke(_inputField.text);

@@ -51,37 +51,17 @@ public class Conveyor<T> where T : MonoBehaviour, IBounds
         foreach (var obj in _conveyor)
         {
             var objPos = obj.transform.position;
-            var direction = position - objPos;
-            var absDirection = new Vector2(Mathf.Abs(direction.x), Mathf.Abs(direction.y));
-            Vector2 halfSize = obj.bounds.size * 0.5f;
-
-            if(absDirection.x < halfSize.x && absDirection.y < halfSize.y)
+            var objBounds = obj.bounds;
+            float distance = Vector3.Distance(position, objBounds.ClosestPoint(position));
+            if (distance < minDist)
             {
+                minDist = distance;
                 result = obj;
-                break;
-            }
-
-            var objClosestPos = objPos;
-            if(absDirection.x > absDirection.y)
-            {
-                objClosestPos.x += Mathf.Sign(direction.x) * halfSize.x;
-                objClosestPos.y += (direction.y / absDirection.x) * halfSize.x;
             }
             else
             {
-                objClosestPos.x += (direction.x / absDirection.y) * halfSize.y;
-                objClosestPos.y += Mathf.Sign(direction.y) * halfSize.y;
-            }
-
-            float dist = Vector3.Distance(objClosestPos, position);
-
-            if (minDist > dist)
-            {
-                result = obj;
-                minDist = dist;
-            }
-            else
                 break;
+            }
         }
             
         return true;

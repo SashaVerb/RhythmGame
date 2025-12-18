@@ -46,7 +46,6 @@ public class LongNoteView : MonoBehaviour, IBounds
 
     public void StopEffect()
     {
-        //mask.enabled = false;
     }
 
     private void SetMaskSizeAsSprite()

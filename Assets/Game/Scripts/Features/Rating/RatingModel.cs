@@ -1,9 +1,10 @@
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class RatingModel
+public class RatingModel : IDisposable
 {
     public static readonly string PATH = Path.Combine(Application.persistentDataPath, "Rating.json");
 
@@ -66,5 +67,10 @@ public class RatingModel
     public void Save()
     {
         File.WriteAllText(PATH, JsonConvert.SerializeObject(_rating));
+    }
+
+    public void Dispose()
+    {
+        Save();
     }
 }

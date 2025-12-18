@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3080ef5d27651e34badbc5dbed98c717, type: 3}
   m_Name: TrackConfig
   m_EditorClassIdentifier: 
-  perfectDistance: 0.1
+  perfectDistance: 0.2
   goodDistance: 0.8
-  disappearOffset: 50
+  disappearOffset: 1

@@ -52,7 +52,7 @@ public class SongPlayer : MonoBehaviour, IPausable
             if(note.type == NoteFactory.Type.Long)
             {
                 var longNote = createdNote as LongNote;
-                longNote.Height = note.duration * song.speed;
+                longNote.Height = (note.duration / song.bpm) * 60f * song.speed;
             }
 
             tracks.AddNote(createdNote, currentInterval + second);

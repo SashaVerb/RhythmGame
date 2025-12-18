@@ -4,6 +4,10 @@ using Zenject;
 public class TrackView : MonoBehaviour
 {
     [SerializeField] private Transform _textEffects;
+    [SerializeField] ParticleSystem particles;
+    [SerializeField] ParticleSystem mistakeParticles;
+    [SerializeField] PingPongScaleEffect pingPongScaleEffect;
+    [SerializeField] int particleEmit = 10;
 
     private TextEffect.Factory _textEffectFactory;
     private TextEffect _textEffect;
@@ -15,12 +19,19 @@ public class TrackView : MonoBehaviour
 
     public void OnHit(HitType hitType)
     {
-        ShowTextEffect(hitType.ToString());
+        pingPongScaleEffect.Play();
+        particles.Emit(particleEmit);
+
+        if (hitType == HitType.Perfect)
+        {
+            ShowTextEffect("Perfect");
+        }
     }
 
     public void OnMiss()
     {
-        ShowTextEffect("Miss");
+        pingPongScaleEffect.Play();
+        mistakeParticles.Emit(particleEmit);
     }
 
     private void ShowTextEffect(string text)
